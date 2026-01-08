@@ -1,0 +1,33 @@
+[workspace]
+resolver = "2"
+members = ["playground"]
+
+default-members = ["playground"]
+
+[workspace.package]
+version = "0.1.0"
+authors = ["thinkgo <thinkgo@aliyun.com>"]
+edition = "2024"
+rust-version = "1.92.0"
+description = "rust-playground is a playground for rust."
+keywords = ["playground"]
+license = "Apache-2.0"
+readme = "README.md"
+homepage = "https://github.com/thinkgos/rust-playground"
+repository = "https://github.com/thinkgos/rust-playground"
+
+[workspace.dependencies]
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+# unused = "allow" # for experimental dev
+
+[profile.dev.package."*"]
+opt-level = "z"
+
+[profile.release]
+opt-level = "z"
+strip = true
+lto = true
+codegen-units = 1
+panic = "abort"
