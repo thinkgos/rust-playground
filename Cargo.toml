@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["playground"]
+members = ["DataAnalysis/polars-cc","playground"]
 
 default-members = ["playground"]
 
