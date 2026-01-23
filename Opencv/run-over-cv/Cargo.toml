@@ -1,5 +1,5 @@
 [package]
-name = "face-detect"
+name = "run-over-cv"
 version.workspace = true
 authors.workspace = true
 edition.workspace = true

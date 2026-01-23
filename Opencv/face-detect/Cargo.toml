@@ -12,6 +12,8 @@ homepage.workspace = true
 repository.workspace = true
 
 [dependencies]
+opencv = { version = "0.98" }
+anyhow = "1.0"
 
 [lints]
 workspace = true
