@@ -7,6 +7,8 @@ fn main() -> Result<(), anyhow::Error> {
     let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_COLOR)?;
     println!("source shape: {:?}", imgutil::shape(&img));
 
+    // 基本操作
+    // 提取ROI区域
     let roi = img.roi(Rect {
         x: 120,
         y: 50,

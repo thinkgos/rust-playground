@@ -13,9 +13,9 @@ fn main() -> Result<(), anyhow::Error> {
         imgproc::FONT_HERSHEY_SIMPLEX,               // 字体
         2.0,                                         // 文字大小
         core::Scalar::new(255.0, 255.0, 255.0, 0.0), // 文字颜色
-        1,
-        imgproc::LINE_AA,
-        false,
+        1,                                           // 文字宽度
+        imgproc::LINE_AA,                            // 线的类型
+        false,                                       // 是否使用反锯齿
     )?;
     imgcodecs::imwrite("assets/output/draw_text.png", &img, &Vector::new())?;
     Ok(())

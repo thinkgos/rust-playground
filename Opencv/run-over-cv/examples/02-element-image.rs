@@ -2,6 +2,9 @@ use opencv::core::{Mat, Vector};
 use opencv::imgcodecs;
 use opencv::imgproc;
 
+// 读取图片
+// 转为灰度图
+// 保存图片
 fn main() -> Result<(), anyhow::Error> {
     let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_COLOR)?;
     let mut dst = Mat::default();

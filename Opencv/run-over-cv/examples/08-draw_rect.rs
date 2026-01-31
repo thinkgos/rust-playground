@@ -8,17 +8,17 @@ fn main() -> Result<(), anyhow::Error> {
     // !画矩形
     // 只需要定义矩形的左上角和右下角, 以及线的颜色和线宽即可.
     imgproc::rectangle(
-        &mut img,
+        &mut img, // 直接作用的图片
         core::Rect {
             x: 50,
             y: 100,
             width: 350,
             height: 100,
-        },
-        core::Scalar::new(0.0, 255.0, 0.0, 0.0),
-        5,
-        imgproc::LINE_8,
-        0,
+        }, // 矩形的范围
+        core::Scalar::new(0.0, 255.0, 0.0, 0.0), // 线的颜色
+        5,        // 线宽
+        imgproc::LINE_8, // 线的类型
+        0,        // 偏移量
     )?;
     imgcodecs::imwrite("assets/output/draw_rect.png", &img, &Vector::new())?;
     Ok(())

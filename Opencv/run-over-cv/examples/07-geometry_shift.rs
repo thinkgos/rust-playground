@@ -4,8 +4,7 @@ use opencv::{imgcodecs, imgproc};
 fn main() -> Result<(), anyhow::Error> {
     let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_COLOR)?;
 
-    let rows = img.rows();
-    let cols = img.cols();
+    let size = img.size()?;
 
     // !平移
     // 定义平移矩阵, 需要是 numpy 的 float32 类型
@@ -15,16 +14,13 @@ fn main() -> Result<(), anyhow::Error> {
     let mut dst = Mat::default();
     // 用仿射变换实现平移
     imgproc::warp_affine(
-        &img,
-        &mut dst,
-        &m,
-        core::Size {
-            width: cols,
-            height: rows,
-        },
-        imgproc::INTER_LINEAR,
-        core::BORDER_CONSTANT,
-        core::Scalar::default(),
+        &img,                    // 输入图片
+        &mut dst,                // 输出的图片
+        &m,                      // 变换矩阵 - 平移矩阵
+        size,                    // 输出图片的大小
+        imgproc::INTER_LINEAR,   // 插值方法
+        core::BORDER_CONSTANT,   // 边界模式
+        core::Scalar::default(), // 边界值, 用于CONSTANT边界模式, 默认为0.
     )?;
     imgcodecs::imwrite(
         "assets/output/lena_geometry_shift.png",

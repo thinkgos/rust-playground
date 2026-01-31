@@ -13,20 +13,19 @@ fn main() -> Result<(), anyhow::Error> {
         Point { x: 230, y: 230 },
         Point { x: 250, y: 40 },
     ]);
-    // 顶点个数: 4, 矩阵变成 4*1*2 维
-    // 第一个表示点的数量, 第二个表示通道, 第三个表示坐标
-    let mut contours = Vector::<Vector<Point>>::new();
-    contours.push(pts);
-    // # 如果画多条直线, 可以一次性传多个2*1*2维的数组
     imgproc::polylines(
-        &mut img,
-        &contours,
-        true,
-        core::Scalar::new(0.0, 255.0, 255.0, 0.0),
-        5,
-        imgproc::LINE_8,
-        0,
+        &mut img,                                  // 直接作用的图片
+        &pts,                                      // 要画的多边形的顶点坐标
+        true,                                      // 是否闭合多边形
+        core::Scalar::new(0.0, 255.0, 255.0, 0.0), // 线的颜色
+        5,                                         // 线宽
+        imgproc::LINE_8,                           // 线的类型
+        0,                                         // 偏移量
     )?;
     imgcodecs::imwrite("assets/output/draw_polygon.png", &img, &Vector::new())?;
+
+    // ! 画多条线
+    // 可以一次性传多个2*1*2维的数组
+    // TODO:
     Ok(())
 }

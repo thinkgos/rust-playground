@@ -10,15 +10,15 @@ fn main() -> Result<(), anyhow::Error> {
         // 按照指定的宽度、高度缩放图片
         let mut dst = Mat::default();
         imgproc::resize(
-            &img,
-            &mut dst,
+            &img,     // 输入图片
+            &mut dst, // 输出的图片
             core::Size {
                 width: 132,
                 height: 150,
-            },
-            0.0,
-            0.0,
-            imgproc::INTER_LINEAR,
+            }, // 输出图片的大小
+            0.0,      // 横向轴的比例因子
+            0.0,      // 纵向轴的比例因子
+            imgproc::INTER_LINEAR, // 插值方法
         )?;
         imgcodecs::imwrite(
             "assets/output/lena_geometry_resize_shrink1.png",
