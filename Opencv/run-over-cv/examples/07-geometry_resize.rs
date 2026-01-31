@@ -1,0 +1,72 @@
+use opencv::core::{self, Mat, Vector};
+use opencv::imgcodecs;
+use opencv::imgproc;
+
+fn main() -> Result<(), anyhow::Error> {
+    let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_GRAYSCALE)?;
+
+    // ! 缩放
+    {
+        // 按照指定的宽度、高度缩放图片
+        let mut dst = Mat::default();
+        imgproc::resize(
+            &img,
+            &mut dst,
+            core::Size {
+                width: 132,
+                height: 150,
+            },
+            0.0,
+            0.0,
+            imgproc::INTER_LINEAR,
+        )?;
+        imgcodecs::imwrite(
+            "assets/output/lena_geometry_resize_shrink1.png",
+            &dst,
+            &Vector::new(),
+        )?;
+    }
+
+    {
+        // 按照比例缩放, 如 x,y 轴均缩小一倍, interpolation 采用缩放方法, 默认采用插值
+        let mut dst = Mat::default();
+        imgproc::resize(
+            &img,
+            &mut dst,
+            core::Size {
+                width: 0,
+                height: 0,
+            },
+            0.5,
+            0.5,
+            imgproc::INTER_LINEAR,
+        )?;
+        imgcodecs::imwrite(
+            "assets/output/lena_geometry_resize_shrink2.png",
+            &dst,
+            &Vector::new(),
+        )?;
+    }
+
+    {
+        // 按照比例缩放, 如 x,y 轴均放大一倍
+        let mut dst = Mat::default();
+        imgproc::resize(
+            &img,
+            &mut dst,
+            core::Size {
+                width: 0,
+                height: 0,
+            },
+            2.0,
+            2.0,
+            imgproc::INTER_LINEAR,
+        )?;
+        imgcodecs::imwrite(
+            "assets/output/lena_geometry_resize_zoom.png",
+            &dst,
+            &Vector::new(),
+        )?;
+    }
+    Ok(())
+}
