@@ -1,23 +1,37 @@
-import numpy as np
-import cv2
+use opencv::core::{self, Vector};
+use opencv::imgcodecs;
+use opencv::imgproc;
+use opencv::prelude::*;
 
-#! 图像相加
-x = np.uint8([250])
-y = np.uint8([10])
-img = cv2.add(x, y)
-print(cv2.add(x, y))  # 250+10 = 260 => 255
-print(x + y)  # 250+10 = 260 % 256 = 4
+fn main() -> Result<(), anyhow::Error> {
+    let img1 = imgcodecs::imread("assets/dog1.jpeg", imgcodecs::IMREAD_COLOR)?;
+    let img2 = imgcodecs::imread("assets/dog2.jpeg", imgcodecs::IMREAD_COLOR)?;
 
-#! 图像混合
-# dst=α×img1+β×img2+γ 其中γ是相当于一个修正值
+    // ! 图像混合
+    // 图像混合需要形状一样
+    // dst=α×img1+β×img2+γ 其中γ是相当于一个修正值
+    let img1_size = img1.size()?;
+    let mut img2_resized = Mat::default();
+    imgproc::resize(
+        &img2,
+        &mut img2_resized,
+        img1_size,
+        0.0,
+        0.0,
+        imgproc::INTER_LINEAR,
+    )?;
+    // 按权重进行混合
+    let mut dst = Mat::default();
+    core::add_weighted(
+        &img1,         // 输入图片1
+        0.6,           // 图片1的权重
+        &img2_resized, // 输入图片2
+        0.4,           // 图片2的权重
+        0.0,           // 修正值
+        &mut dst,      // 输出图片
+        -1,            // 输出图片的深度
+    )?;
+    imgcodecs::imwrite("assets/output/dog_mixture_blend.jpeg", &dst, &Vector::new())?;
 
-img1 = cv2.imread('assets/dog1.jpeg')
-img2 = cv2.imread('assets/dog2.jpeg')
-print("img1 shape: ", img1.shape)
-print("img2 shape: ", img2.shape)
-# 图像混合需要形状一样
-(rows, cols) = img1.shape[:2]
-img2 = cv2.resize(img2, (cols, rows))
-# 按权重进行混合
-img = cv2.addWeighted(img1, 0.6, img2, 0.4, 0)
-cv2.imwrite('assets/output/dog_mixture_blend.jpeg', img)
+    Ok(())
+}

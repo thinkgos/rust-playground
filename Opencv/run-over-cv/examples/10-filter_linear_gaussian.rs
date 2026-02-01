@@ -1,9 +1,27 @@
-import cv2
+use opencv::core::{self, Vector};
+use opencv::imgcodecs;
+use opencv::imgproc;
+use opencv::prelude::*;
 
-img = cv2.imread('assets/lena.png')
+fn main() -> Result<(), anyhow::Error> {
+    let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_COLOR)?;
+    // ! 高斯滤波, 线性滤波方式
+    //  一种基于高斯函数的滤波处理, 它取的是卷积核区域内元素的加权均值.
+    //  参数3值越大, 模糊效果越明显.
+    let mut dst = Mat::default();
+    imgproc::gaussian_blur(
+        &img,                  // 输入图片
+        &mut dst,              // 输出图片
+        core::Size::new(3, 3), // 卷积核大小
+        1.0,                   // 卷积核在x方向的标准偏差
+        1.0,                   // 卷积核在y方向的标准偏差
+        core::BORDER_DEFAULT,  // 边界处理方式
+    )?;
 
-#! 高斯滤波, 线性滤波方式
-# 一种基于高斯函数的滤波处理, 它取的是卷积核区域内元素的加权均值, 用`cv2.GaussianBlur()`实现
-# 参数3值越大, 模糊效果越明显.
-img_gaussian = cv2.GaussianBlur(img, (3, 3), 1)
-cv2.imwrite('assets/output/lena_filter_gaussian.png', img_gaussian)
+    imgcodecs::imwrite(
+        "assets/output/lena_filter_gaussian.png",
+        &dst,
+        &Vector::new(),
+    )?;
+    Ok(())
+}
