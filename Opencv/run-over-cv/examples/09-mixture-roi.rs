@@ -33,11 +33,11 @@ fn main() -> Result<(), anyhow::Error> {
     // 图片叠加, 相加的两幅图片的形状必须相同.
     let mut roi_mix_logo = Mat::default();
     core::add(
-        &roi_bg,               // 输入图1
-        &logo,                 // 输入图2
+        &roi_bg,           // 输入图1
+        &logo,             // 输入图2
         &mut roi_mix_logo, // 输出图
-        &core::no_array(),     // 可选操作掩码
-        -1,                    // 可选深度
+        &core::no_array(), // 可选操作掩码
+        -1,                // 可选深度
     )?;
     // 只改变roi区域, 也就是logo位
     roi_mix_logo.copy_to(&mut roi)?;

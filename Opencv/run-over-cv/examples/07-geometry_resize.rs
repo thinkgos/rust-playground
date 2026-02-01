@@ -3,7 +3,7 @@ use opencv::imgcodecs;
 use opencv::imgproc;
 
 fn main() -> Result<(), anyhow::Error> {
-    let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_GRAYSCALE)?;
+    let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_COLOR)?;
 
     // ! 缩放
     {

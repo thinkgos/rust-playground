@@ -2,7 +2,7 @@ use opencv::core::{self, Mat, Vector};
 use opencv::imgcodecs;
 
 fn main() -> Result<(), anyhow::Error> {
-    let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_GRAYSCALE)?;
+    let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_COLOR)?;
 
     // ! 翻转
     // 参数2: = 0 表示垂直翻转,
