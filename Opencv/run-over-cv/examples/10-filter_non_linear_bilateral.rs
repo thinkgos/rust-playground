@@ -1,5 +1,3 @@
-// img_bilateral = cv2.bilateralFilter(img, 9, 75, 75)
-
 use opencv::core::{self, Vector};
 use opencv::imgcodecs;
 use opencv::imgproc;
