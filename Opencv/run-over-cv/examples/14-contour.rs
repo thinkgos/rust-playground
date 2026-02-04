@@ -1,17 +1,49 @@
-import cv2
+use opencv::core::{self, Vector};
+use opencv::imgcodecs;
+use opencv::imgproc;
+use opencv::prelude::*;
 
-img = cv2.imread("assets/sun.png")
-img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-ret, thresh = cv2.threshold(img_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+fn main() -> Result<(), anyhow::Error> {
+    let mut img = imgcodecs::imread("assets/sun.png", imgcodecs::IMREAD_COLOR)?;
 
-# 寻找二值化图中的轮廓
-contours, hierarchy = cv2.findContours(
-    thresh,
-    cv2.RETR_TREE,
-    cv2.CHAIN_APPROX_SIMPLE,
-)
-print(len(contours))
+    let mut img_gray = Mat::default();
+    imgproc::cvt_color_def(&img, &mut img_gray, imgproc::COLOR_BGR2GRAY)?;
 
-# 绘制找出来的轮廓
-cv2.drawContours(img, contours, -1, (0, 0, 255), 2)
-img = cv2.imwrite("assets/sun_contour.png", img)
+    // ! 轮廓
+    // 轮廓是一系列相连的点组成的曲线, 代表了物体的基本外形.
+    // 轮廓是连续的, 边缘并不全都连续.
+    // 其实边缘主要是作为图像的特征使用, 比如可以用边缘特征可以区分脸和手,
+    // 而轮廓主要用来分析物体的形态, 比如物体的周长和面积等,
+    // 可以说边缘包括轮廓
+
+    let mut thresh = Mat::default();
+    imgproc::threshold(
+        &img_gray,                                         // 输入图片
+        &mut thresh,                                       // 输出图片
+        0.0,                                               // 阈值
+        255.0,                                             // 最大值
+        imgproc::THRESH_BINARY_INV + imgproc::THRESH_OTSU, // 类型
+    )?;
+    // 寻找二值化图中的轮廓
+    let mut contours: Vector<Mat> = Vector::new();
+    imgproc::find_contours_def(
+        &thresh,            // 输入图片
+        &mut contours,      // 输出图片
+        imgproc::RETR_TREE, // 深度
+        imgproc::CHAIN_APPROX_SIMPLE,
+    )?;
+    // 绘制找出来的轮廓
+    imgproc::draw_contours(
+        &mut img,                                // 输入图片
+        &contours,                               // 轮廓
+        -1,                                      // 轮廓索引, -1 表示绘制所有轮廓
+        core::Scalar::new(0.0, 0.0, 255.0, 0.0), // 颜色
+        2,
+        imgproc::LINE_8,
+        &core::no_array(),
+        imgproc::INTER_MAX,
+        core::Point::default(),
+    )?;
+    imgcodecs::imwrite("assets/output/sun_contour.png", &img, &Vector::new())?;
+    Ok(())
+}
