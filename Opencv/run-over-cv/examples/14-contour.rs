@@ -27,10 +27,10 @@ fn main() -> Result<(), anyhow::Error> {
     // 寻找二值化图中的轮廓
     let mut contours: Vector<Mat> = Vector::new();
     imgproc::find_contours_def(
-        &thresh,            // 输入图片
-        &mut contours,      // 输出图片
-        imgproc::RETR_TREE, // 深度
-        imgproc::CHAIN_APPROX_SIMPLE,
+        &thresh,                      // 输入图片
+        &mut contours,                // 输出图片
+        imgproc::RETR_TREE, // 轮廓的查找方法, https://docs.opencv.org/4.0.0/d3/dc0/group__imgproc__shape.html#ga819779b9857cc2f8601e6526a3a5bc71
+        imgproc::CHAIN_APPROX_SIMPLE, // 轮廓近似方法, https://docs.opencv.org/4.0.0/d3/dc0/group__imgproc__shape.html#ga4303f45752694956374734a03c54d5ff
     )?;
     // 绘制找出来的轮廓
     imgproc::draw_contours(
@@ -45,5 +45,6 @@ fn main() -> Result<(), anyhow::Error> {
         core::Point::default(),
     )?;
     imgcodecs::imwrite("assets/output/sun_contour.png", &img, &Vector::new())?;
+
     Ok(())
 }
