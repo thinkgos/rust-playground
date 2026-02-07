@@ -19,7 +19,7 @@ fn main() -> Result<(), anyhow::Error> {
         imgproc::THRESH_BINARY_INV + imgproc::THRESH_OTSU, // 类型
     )?;
     // 寻找二值化图中的轮廓
-    let mut contours: Vector<Mat> = Vector::new();
+    let mut contours: Vector<Vector<core::Point>> = Vector::new();
     imgproc::find_contours_def(
         &thresh,            // 输入图片
         &mut contours,      // 输出图片
