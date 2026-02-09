@@ -6,7 +6,7 @@ use opencv::prelude::*;
 fn main() -> Result<(), anyhow::Error> {
     let img = imgcodecs::imread("assets/sun.png", imgcodecs::IMREAD_GRAYSCALE)?;
     // ! laplacian算子
-    // 水平
+    // 拉
     let mut dst = Mat::default();
     imgproc::laplacian_def(
         &img,         // 输入图片
@@ -15,7 +15,7 @@ fn main() -> Result<(), anyhow::Error> {
     )?;
     let dst = core::abs(&dst)?;
     imgcodecs::imwrite(
-        "assets/output/sun_operator_laplacian.png",
+        "assets/output/sun-operator-laplacian.png",
         &dst,
         &Vector::new(),
     )?;

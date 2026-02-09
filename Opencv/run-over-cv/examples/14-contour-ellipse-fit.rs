@@ -4,7 +4,7 @@ use opencv::imgproc;
 use opencv::prelude::*;
 
 fn main() -> Result<(), anyhow::Error> {
-    let img_color = imgcodecs::imread("assets/sun-well.png", imgcodecs::IMREAD_COLOR)?;
+    let mut img_color = imgcodecs::imread("assets/sun-well.png", imgcodecs::IMREAD_COLOR)?;
 
     let mut img_gray = Mat::default();
     imgproc::cvt_color_def(&img_color, &mut img_gray, imgproc::COLOR_BGR2GRAY)?;
@@ -28,22 +28,19 @@ fn main() -> Result<(), anyhow::Error> {
     )?;
 
     let cnt = contours.get(1)?;
-    // 轮廓面积
-    let area = imgproc::contour_area_def(&cnt)?;
-    println!("area: {}", area);
 
-    // 轮廓周长
-    let perimeter = imgproc::arc_length(&cnt, true)?;
-    println!("perimeter: {}", perimeter);
-
-    // 图像矩 - 各类几何特征
-    // https://en.wikipedia.org/wiki/Image_moment
-    let m = imgproc::moments(&cnt, true)?;
-    println!("m: {:?}", m);
-
-    let mut hu_var = [0.0; 7];
-    imgproc::hu_moments(m, &mut hu_var)?;
-    println!("hu_var: {:?}", hu_var);
+    // 拟合椭圆
+    let ellipse = imgproc::fit_ellipse(&cnt)?;
+    imgproc::ellipse_rotated_rect_def(
+        &mut img_color,
+        ellipse,
+        core::Scalar::new(0.0, 0.0, 255.0, 0.0),
+    )?;
+    imgcodecs::imwrite(
+        "assets/output/sun-contour-ellipse-fit.png",
+        &img_color,
+        &Vector::new(),
+    )?;
 
     Ok(())
 }

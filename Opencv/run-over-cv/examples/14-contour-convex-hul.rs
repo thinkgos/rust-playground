@@ -4,7 +4,7 @@ use opencv::imgproc;
 use opencv::prelude::*;
 
 fn main() -> Result<(), anyhow::Error> {
-    let mut img = imgcodecs::imread("assets/sun_well.png", imgcodecs::IMREAD_COLOR)?;
+    let mut img = imgcodecs::imread("assets/sun-well.png", imgcodecs::IMREAD_COLOR)?;
 
     let mut img_gray = Mat::default();
     imgproc::cvt_color_def(&img, &mut img_gray, imgproc::COLOR_BGR2GRAY)?;

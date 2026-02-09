@@ -4,7 +4,7 @@ use opencv::imgproc;
 use opencv::prelude::*;
 
 fn main() -> Result<(), anyhow::Error> {
-    let img_color = imgcodecs::imread("assets/sun-well.png", imgcodecs::IMREAD_COLOR)?;
+    let mut img_color = imgcodecs::imread("assets/sun-well.png", imgcodecs::IMREAD_COLOR)?;
 
     let mut img_gray = Mat::default();
     imgproc::cvt_color_def(&img_color, &mut img_gray, imgproc::COLOR_BGR2GRAY)?;
@@ -28,22 +28,35 @@ fn main() -> Result<(), anyhow::Error> {
     )?;
 
     let cnt = contours.get(1)?;
-    // 轮廓面积
-    let area = imgproc::contour_area_def(&cnt)?;
-    println!("area: {}", area);
 
-    // 轮廓周长
-    let perimeter = imgproc::arc_length(&cnt, true)?;
-    println!("perimeter: {}", perimeter);
+    // 最小外接矩形
+    // 找到一个能包围物体的最小矩形, 注意这是个旋转矩形, 和正矩形是不一样的
+    let rotated_rect = imgproc::min_area_rect(&cnt)?;
 
-    // 图像矩 - 各类几何特征
-    // https://en.wikipedia.org/wiki/Image_moment
-    let m = imgproc::moments(&cnt, true)?;
-    println!("m: {:?}", m);
+    let mut rect_points = core::Vec4f::default();
+    imgproc::box_points(rotated_rect, &mut rect_points)?;
+    println!("min_area_rect points: {:?}", rect_points);
 
-    let mut hu_var = [0.0; 7];
-    imgproc::hu_moments(m, &mut hu_var)?;
-    println!("hu_var: {:?}", hu_var);
+    let mut pts = [core::Point2f::default(); 4];
+    rotated_rect.points(&mut pts)?;
+
+    let pts: Vector<core::Point> = pts
+        .iter()
+        .map(|v| core::Point::new(v.x as i32, v.y as i32))
+        .collect();
+
+    imgproc::polylines_def(
+        &mut img_color,
+        &pts,
+        true,
+        core::Scalar::new(0.0, 0.0, 255.0, 0.0),
+    )?;
+
+    imgcodecs::imwrite(
+        "assets/output/sun-contour-rect-rotate.png",
+        &img_color,
+        &Vector::new(),
+    )?;
 
     Ok(())
 }

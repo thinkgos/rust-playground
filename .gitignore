@@ -20,4 +20,6 @@ target
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-/Opencv/run-over-cv/assets/output/*.{png,jpg,jpeg}
+/Opencv/run-over-cv/assets/output/*.png
+/Opencv/run-over-cv/assets/output/*.jpg
+/Opencv/run-over-cv/assets/output/*.jpeg

@@ -28,22 +28,18 @@ fn main() -> Result<(), anyhow::Error> {
     )?;
 
     let cnt = contours.get(1)?;
-    // 轮廓面积
-    let area = imgproc::contour_area_def(&cnt)?;
-    println!("area: {}", area);
 
-    // 轮廓周长
-    let perimeter = imgproc::arc_length(&cnt, true)?;
-    println!("perimeter: {}", perimeter);
-
-    // 图像矩 - 各类几何特征
-    // https://en.wikipedia.org/wiki/Image_moment
-    let m = imgproc::moments(&cnt, true)?;
-    println!("m: {:?}", m);
-
-    let mut hu_var = [0.0; 7];
-    imgproc::hu_moments(m, &mut hu_var)?;
-    println!("hu_var: {:?}", hu_var);
+    // 形状匹配, 检测两个形状之间的相似度, 值越小, 越相似
+    //
+    // 形状匹配是通过图像矩(imgproc::hu_moments)来实现的
+    // https://en.wikipedia.org/wiki/Image_moment#Rotation_invariant_moments
+    let match_val = imgproc::match_shapes(
+        &cnt,
+        &cnt,
+        imgproc::ShapeMatchModes::CONTOURS_MATCH_I1.into(),
+        0.0,
+    )?;
+    println!("match_val: {}", match_val);
 
     Ok(())
 }
