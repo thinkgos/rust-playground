@@ -14,6 +14,6 @@ fn main() -> Result<(), anyhow::Error> {
         height: 350,
     })?;
 
-    imgcodecs::imwrite("assets/output/lena_operator_roi.png", &roi, &Vector::new())?;
+    imgcodecs::imwrite("assets/output/lena-operator-roi.png", &roi, &Vector::new())?;
     Ok(())
 }

@@ -18,6 +18,6 @@ fn main() -> Result<(), anyhow::Error> {
         imgproc::LINE_AA,                            // 线的类型
         false,                                       // 是否使用反锯齿
     )?;
-    imgcodecs::imwrite("assets/output/draw_text.png", &img, &Vector::new())?;
+    imgcodecs::imwrite("assets/output/draw-text.png", &img, &Vector::new())?;
     Ok(())
 }

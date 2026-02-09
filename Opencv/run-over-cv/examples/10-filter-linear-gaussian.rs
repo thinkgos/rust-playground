@@ -19,7 +19,7 @@ fn main() -> Result<(), anyhow::Error> {
     )?;
 
     imgcodecs::imwrite(
-        "assets/output/lena_filter_gaussian.png",
+        "assets/output/lena-filter-gaussian.png",
         &dst,
         &Vector::new(),
     )?;

@@ -25,7 +25,7 @@ fn main() -> Result<(), anyhow::Error> {
     )?;
 
     imgcodecs::imwrite(
-        "assets/output/lena_geometry_shift.png",
+        "assets/output/lena-geometry-shift.png",
         &dst,
         &Vector::new(),
     )?;

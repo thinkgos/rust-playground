@@ -27,7 +27,7 @@ fn main() -> Result<(), anyhow::Error> {
             4.0,
         )?;
         imgcodecs::imwrite(
-            "assets/output/lena_threshold_adaptive_mean.png",
+            "assets/output/lena-threshold-adaptive-mean.png",
             &dst,
             &Vector::new(),
         )?;
@@ -45,7 +45,7 @@ fn main() -> Result<(), anyhow::Error> {
             6.0,
         )?;
         imgcodecs::imwrite(
-            "assets/output/lena_threshold_adaptive_gaussian.png",
+            "assets/output/lena-threshold-adaptive-gaussian.png",
             &dst,
             &Vector::new(),
         )?;

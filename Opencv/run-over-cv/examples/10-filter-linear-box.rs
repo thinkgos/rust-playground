@@ -5,6 +5,7 @@ use opencv::prelude::*;
 
 fn main() -> Result<(), anyhow::Error> {
     let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_COLOR)?;
+
     // ! 方框滤波, 线性滤波方式
     // 一种最简单的滤波处理, 它取的是卷积核区域内元素的均值.
     let mut dst = Mat::default();
@@ -18,6 +19,6 @@ fn main() -> Result<(), anyhow::Error> {
         core::BORDER_DEFAULT,     // 边界处理方式
     )?;
 
-    imgcodecs::imwrite("assets/output/lena_filter_box.png", &dst, &Vector::new())?;
+    imgcodecs::imwrite("assets/output/lena-filter-box.png", &dst, &Vector::new())?;
     Ok(())
 }

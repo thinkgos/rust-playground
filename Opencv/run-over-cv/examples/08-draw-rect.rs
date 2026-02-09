@@ -15,6 +15,6 @@ fn main() -> Result<(), anyhow::Error> {
         imgproc::LINE_8,                         // 线的类型
         0,                                       // 偏移量
     )?;
-    imgcodecs::imwrite("assets/output/draw_rect.png", &img, &Vector::new())?;
+    imgcodecs::imwrite("assets/output/draw-rect.png", &img, &Vector::new())?;
     Ok(())
 }

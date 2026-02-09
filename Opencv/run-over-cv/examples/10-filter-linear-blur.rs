@@ -2,9 +2,11 @@ use opencv::core::{self, Vector};
 use opencv::imgcodecs;
 use opencv::imgproc;
 use opencv::prelude::*;
+use run_over_cv::imgutil;
 
 fn main() -> Result<(), anyhow::Error> {
     let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_COLOR)?;
+
     // ! 均值滤波, 线性滤波方式
     // 一种最简单的滤波处理, 它取的是卷积核区域内元素的均值.
     let mut dst = Mat::default();
@@ -16,6 +18,8 @@ fn main() -> Result<(), anyhow::Error> {
         core::BORDER_DEFAULT,     // 边界处理方式
     )?;
 
-    imgcodecs::imwrite("assets/output/lena_filter_blur.png", &dst, &Vector::new())?;
+    println!("dst: {:?}", imgutil::shape(&dst));
+
+    imgcodecs::imwrite("assets/output/lena-filter-blur.png", &dst, &Vector::new())?;
     Ok(())
 }

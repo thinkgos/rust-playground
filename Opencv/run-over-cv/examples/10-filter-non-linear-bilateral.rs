@@ -6,7 +6,7 @@ use opencv::prelude::*;
 fn main() -> Result<(), anyhow::Error> {
     let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_COLOR)?;
     // ! 双边滤波, 非线性滤波方式
-    // 图像的边缘信息能有效的保留下来
+    // 图像在去噪的同时最高程度保留图形真实度, 边缘信息能有效的保留下来.
     let mut dst = Mat::default();
     imgproc::bilateral_filter(
         &img,                 // 输入图片
@@ -18,7 +18,7 @@ fn main() -> Result<(), anyhow::Error> {
     )?;
 
     imgcodecs::imwrite(
-        "assets/output/lena_filter_bilateral.png",
+        "assets/output/lena-filter-bilateral.png",
         &dst,
         &Vector::new(),
     )?;

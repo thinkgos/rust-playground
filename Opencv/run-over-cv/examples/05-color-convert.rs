@@ -9,6 +9,6 @@ fn main() -> Result<(), anyhow::Error> {
     let mut dst = Mat::default();
     imgproc::cvt_color(&img, &mut dst, imgproc::COLOR_BGR2GRAY, 0)?;
 
-    imgcodecs::imwrite("assets/output/lena_convert_gray.png", &dst, &Vector::new())?;
+    imgcodecs::imwrite("assets/output/lena-convert-gray.png", &dst, &Vector::new())?;
     Ok(())
 }

@@ -17,7 +17,7 @@ fn main() -> Result<(), anyhow::Error> {
             imgproc::THRESH_BINARY, // 阈值方式, 有五种
         )?;
         imgcodecs::imwrite(
-            "assets/output/lena_threshold_binary.png",
+            "assets/output/lena-threshold-binary.png",
             &dst,
             &Vector::new(),
         )?;
@@ -27,7 +27,7 @@ fn main() -> Result<(), anyhow::Error> {
         let mut dst = Mat::default();
         imgproc::threshold(&img, &mut dst, 127.0, 255.0, imgproc::THRESH_BINARY_INV)?;
         imgcodecs::imwrite(
-            "assets/output/lena_threshold_binary_inv.png",
+            "assets/output/lena-threshold-binary-inv.png",
             &dst,
             &Vector::new(),
         )?;
@@ -37,7 +37,7 @@ fn main() -> Result<(), anyhow::Error> {
         let mut dst = Mat::default();
         imgproc::threshold(&img, &mut dst, 127.0, 255.0, imgproc::THRESH_TRUNC)?;
         imgcodecs::imwrite(
-            "assets/output/lena_threshold_trunc.png",
+            "assets/output/lena-threshold-trunc.png",
             &dst,
             &Vector::new(),
         )?;
@@ -46,7 +46,7 @@ fn main() -> Result<(), anyhow::Error> {
         let mut dst = Mat::default();
         imgproc::threshold(&img, &mut dst, 127.0, 255.0, imgproc::THRESH_TOZERO)?;
         imgcodecs::imwrite(
-            "assets/output/lena_threshold_tozero.png",
+            "assets/output/lena-threshold-tozero.png",
             &dst,
             &Vector::new(),
         )?;
@@ -55,7 +55,7 @@ fn main() -> Result<(), anyhow::Error> {
         let mut dst = Mat::default();
         imgproc::threshold(&img, &mut dst, 127.0, 255.0, imgproc::THRESH_TOZERO_INV)?;
         imgcodecs::imwrite(
-            "assets/output/lena_threshold_tozero_inv.png",
+            "assets/output/lena-threshold-tozero-inv.png",
             &dst,
             &Vector::new(),
         )?;

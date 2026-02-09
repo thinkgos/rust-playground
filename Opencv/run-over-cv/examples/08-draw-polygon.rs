@@ -23,7 +23,7 @@ fn main() -> Result<(), anyhow::Error> {
         imgproc::LINE_8,                           // 线的类型
         0,                                         // 偏移量
     )?;
-    imgcodecs::imwrite("assets/output/draw_polygon.png", &img, &Vector::new())?;
+    imgcodecs::imwrite("assets/output/draw-polygon.png", &img, &Vector::new())?;
 
     // ! 画多条线
     // 可以一次性传多个2*1*2维的数组

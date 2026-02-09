@@ -26,7 +26,7 @@ fn main() -> Result<(), anyhow::Error> {
         &mut dst,      // 输出图片
         -1,            // 输出图片的深度
     )?;
-    imgcodecs::imwrite("assets/output/dog_mixture_blend.jpeg", &dst, &Vector::new())?;
+    imgcodecs::imwrite("assets/output/dog-mixture-blend.jpeg", &dst, &Vector::new())?;
 
     Ok(())
 }

@@ -1,5 +1,3 @@
-use std::ops::Div;
-
 use opencv::core::{self, Mat, MatTraitConst, Vector};
 use opencv::{imgcodecs, imgproc};
 
@@ -30,7 +28,7 @@ fn main() -> Result<(), anyhow::Error> {
         core::Scalar::default(), // 边界值, 用于CONSTANT边界模式, 默认为0.
     )?;
     imgcodecs::imwrite(
-        "assets/output/lena_geometry_rotate.png",
+        "assets/output/lena-geometry-rotate.png",
         &dst,
         &Vector::new(),
     )?;

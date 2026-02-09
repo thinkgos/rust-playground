@@ -12,7 +12,7 @@ fn main() -> Result<(), anyhow::Error> {
         1,        // 翻转方向, = 0 表示垂直翻转, > 0 表示水平翻转, < 0 表示垂直水平翻转
     )?;
     imgcodecs::imwrite(
-        "assets/output/lena_geometry_flip_horizontal.png",
+        "assets/output/lena-geometry-flip-horizontal.png",
         &dst,
         &Vector::new(),
     )?;

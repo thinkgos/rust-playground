@@ -18,7 +18,7 @@ fn main() -> Result<(), anyhow::Error> {
             imgproc::INTER_LINEAR,     // 插值方法
         )?;
         imgcodecs::imwrite(
-            "assets/output/lena_geometry_resize_shrink1.png",
+            "assets/output/lena-geometry-resize-shrink1.png",
             &dst,
             &Vector::new(),
         )?;
@@ -36,7 +36,7 @@ fn main() -> Result<(), anyhow::Error> {
             imgproc::INTER_LINEAR,
         )?;
         imgcodecs::imwrite(
-            "assets/output/lena_geometry_resize_shrink2.png",
+            "assets/output/lena-geometry-resize-shrink2.png",
             &dst,
             &Vector::new(),
         )?;
@@ -54,7 +54,7 @@ fn main() -> Result<(), anyhow::Error> {
             imgproc::INTER_LINEAR,
         )?;
         imgcodecs::imwrite(
-            "assets/output/lena_geometry_resize_zoom.png",
+            "assets/output/lena-geometry-resize-zoom.png",
             &dst,
             &Vector::new(),
         )?;

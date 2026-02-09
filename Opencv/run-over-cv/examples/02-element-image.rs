@@ -16,6 +16,6 @@ fn main() -> Result<(), anyhow::Error> {
         0,                       // 通道数, 0: 自动检测
     )?;
 
-    imgcodecs::imwrite("assets/output/lena_gray.png", &dst, &Vector::new())?;
+    imgcodecs::imwrite("assets/output/lena-gray.png", &dst, &Vector::new())?;
     Ok(())
 }

@@ -5,6 +5,7 @@ use opencv::prelude::*;
 
 fn main() -> Result<(), anyhow::Error> {
     let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_COLOR)?;
+
     // ! 中值滤波, 非线性滤波方式
     // 取所有数排序后取中间的值. 非常适用于去除椒盐噪声和斑点噪声.
     let mut dst = Mat::default();
@@ -14,6 +15,6 @@ fn main() -> Result<(), anyhow::Error> {
         3,        // 孔径线性大小, 必须为大于1的奇数
     )?;
 
-    imgcodecs::imwrite("assets/output/lena_filter_median.png", &dst, &Vector::new())?;
+    imgcodecs::imwrite("assets/output/lena-filter-median.png", &dst, &Vector::new())?;
     Ok(())
 }

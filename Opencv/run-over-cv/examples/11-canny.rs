@@ -22,6 +22,6 @@ fn main() -> Result<(), anyhow::Error> {
         false,    //
     )?;
 
-    imgcodecs::imwrite("assets/output/lena_canny.png", &dst, &Vector::new())?;
+    imgcodecs::imwrite("assets/output/lena-canny.png", &dst, &Vector::new())?;
     Ok(())
 }
