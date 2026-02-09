@@ -1,7 +1,12 @@
 [workspace]
-resolver = "2"
-members = ["DataAnalysis/polars-cc","playground"]
+members = [
+    "DataAnalysis/polars-cc",
+    "Opencv/face-detect",
+    "Opencv/run-over-cv",
+    "playground",
+]
 
+resolver = "2"
 default-members = ["playground"]
 
 [workspace.package]
