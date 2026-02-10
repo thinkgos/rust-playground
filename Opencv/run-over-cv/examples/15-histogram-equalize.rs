@@ -27,7 +27,7 @@ fn main() -> Result<(), anyhow::Error> {
         imgproc::cvt_color(&merged, &mut dst, imgproc::COLOR_YCrCb2BGR, 0)?;
 
         imgcodecs::imwrite(
-            "assets/output/lena_equalized.png",
+            "assets/output/lena-equalized.png",
             &dst,
             &core::Vector::new(),
         )?;
@@ -62,7 +62,7 @@ fn main() -> Result<(), anyhow::Error> {
         imgproc::cvt_color(&merged, &mut dst, imgproc::COLOR_YCrCb2BGR, 0)?;
 
         // 8. 保存结果
-        imgcodecs::imwrite("assets/output/lena_clahe.png", &dst, &core::Vector::new())?;
+        imgcodecs::imwrite("assets/output/lena-clahe.png", &dst, &core::Vector::new())?;
     }
     Ok(())
 }

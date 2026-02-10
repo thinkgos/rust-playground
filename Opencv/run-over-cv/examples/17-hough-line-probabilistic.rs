@@ -4,7 +4,7 @@ use opencv::imgproc;
 use opencv::prelude::*;
 
 fn main() -> Result<(), anyhow::Error> {
-    let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_GRAYSCALE)?;
+    let img = imgcodecs::imread("assets/shape.jpg", imgcodecs::IMREAD_GRAYSCALE)?;
 
     // 霍夫变换 - 基于统计概率霍夫直线变换
 
@@ -22,8 +22,8 @@ fn main() -> Result<(), anyhow::Error> {
         &mut lines,                   // 输出的值.
         1.0,                          // 距离 r 的精度, 值越大, 考虑越多的线.
         std::f64::consts::PI / 180.0, // 角度 θ 的精度, 值越小, 考虑越多的线.
-        180,                          // 累加数阈值, 值越小, 考虑越多的线.
-        50.0,                         // 最短长度阈值, 比这个长度短的线会被排除.
+        100,                          // 累加数阈值, 值越小, 考虑越多的线.
+        20.0,                         // 最短长度阈值, 比这个长度短的线会被排除.
         10.0,                         // 同一直线两点之间的最大距离
     )?;
 
@@ -47,7 +47,7 @@ fn main() -> Result<(), anyhow::Error> {
     }
 
     imgcodecs::imwrite(
-        "assets/output/lena_hough_line_probabilistic.png",
+        "assets/output/shape-hough-line-probabilistic.png",
         &drawing,
         &Vector::new(),
     )?;

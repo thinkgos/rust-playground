@@ -4,7 +4,7 @@ use opencv::imgproc;
 use opencv::prelude::*;
 
 fn main() -> Result<(), anyhow::Error> {
-    let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_GRAYSCALE)?;
+    let img = imgcodecs::imread("assets/shape.jpg", imgcodecs::IMREAD_GRAYSCALE)?;
 
     // 霍夫变换
     // 霍夫变换常用来在图像中提取直线和圆等几何形状
@@ -28,10 +28,10 @@ fn main() -> Result<(), anyhow::Error> {
         &mut lines,                   // 输出的值.
         1.0,                          // 距离 r 的精度, 值越大, 考虑越多的线.
         std::f64::consts::PI / 180.0, // 角度 θ 的精度, 值越小, 考虑越多的线.
-        180,                          // 累加数阈值, 值越小, 考虑越多的线.
+        100,                          // 累加数阈值, 值越小, 考虑越多的线.
     )?;
 
-    // 绘制直线 (将极坐标转回直角坐标绘制)
+    // 绘制直线(将极坐标 -> 直角坐标绘制)
     let mut drawing = Mat::zeros(img.rows(), img.cols(), core::CV_8UC3)?.to_mat()?;
     for line in lines.iter() {
         let rho = line[0]; // r
@@ -55,7 +55,7 @@ fn main() -> Result<(), anyhow::Error> {
     }
 
     imgcodecs::imwrite(
-        "assets/output/lena_hough_line_std.png",
+        "assets/output/shape-hough-line-std.png",
         &drawing,
         &Vector::new(),
     )?;

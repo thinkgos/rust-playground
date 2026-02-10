@@ -46,7 +46,7 @@ fn main() -> Result<(), anyhow::Error> {
         core::Point::default(),
     )?;
 
-    imgcodecs::imwrite("assets/output/sun_contour_approx.png", &img, &Vector::new())?;
+    imgcodecs::imwrite("assets/output/sun-contour-approx.png", &img, &Vector::new())?;
 
     Ok(())
 }

@@ -4,7 +4,7 @@ use opencv::imgproc;
 use opencv::prelude::*;
 
 fn main() -> Result<(), anyhow::Error> {
-    let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_GRAYSCALE)?;
+    let img = imgcodecs::imread("assets/sun-well.png", imgcodecs::IMREAD_GRAYSCALE)?;
 
     // 霍夫圆变换
     // 圆是用一般使用霍夫梯度法减少计算量
@@ -15,7 +15,7 @@ fn main() -> Result<(), anyhow::Error> {
         &img,       // 输入图片
         &mut edges, // 输出图片
         30.0,       // 最低阀值
-        120.0,      // 最高阀值
+        70.0,       // 最高阀值
     )?;
 
     let mut circles: Vector<core::Vec3f> = Vector::new();
@@ -27,9 +27,9 @@ fn main() -> Result<(), anyhow::Error> {
         20.0,                    // 跟霍夫直线变换中的累加数阈值一样
     )?;
 
-    // 绘制直线 (将极坐标转回直角坐标绘制)
-    let mut drawing = Mat::zeros(img.rows(), img.cols(), core::CV_8UC3)?.to_mat()?;
+    println!("{:?}", circles.len());
 
+    let mut drawing = Mat::zeros(img.rows(), img.cols(), core::CV_8UC3)?.to_mat()?;
     for p in circles.iter() {
         println!("{:?}", p);
         imgproc::circle_def(
@@ -44,7 +44,7 @@ fn main() -> Result<(), anyhow::Error> {
     }
 
     imgcodecs::imwrite(
-        "assets/output/lena_hough_circle.png",
+        "assets/output/shape-hough-circle.png",
         &drawing,
         &Vector::new(),
     )?;

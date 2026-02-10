@@ -16,7 +16,7 @@ fn main() -> Result<(), anyhow::Error> {
             &mut dst, // 输出图片
         )?;
 
-        imgcodecs::imwrite("assets/output/lena_pyr_down.png", &dst, &Vector::new())?;
+        imgcodecs::imwrite("assets/output/lena-pyr-down.png", &dst, &Vector::new())?;
     }
 
     // 向上采样
@@ -27,7 +27,7 @@ fn main() -> Result<(), anyhow::Error> {
             &mut dst, // 输出图片
         )?;
 
-        imgcodecs::imwrite("assets/output/lena_pyr_up.png", &dst, &Vector::new())?;
+        imgcodecs::imwrite("assets/output/lena-pyr-up.png", &dst, &Vector::new())?;
     }
 
     // ! 拉普拉斯金字塔
@@ -47,7 +47,7 @@ fn main() -> Result<(), anyhow::Error> {
         )?;
 
         let dst = core::sub_mat_mat(&img, &img_down_up)?.to_mat()?;
-        imgcodecs::imwrite("assets/output/lena_pyr_lpls.png", &dst, &Vector::new())?;
+        imgcodecs::imwrite("assets/output/lena-pyr-lpls.png", &dst, &Vector::new())?;
     }
 
     Ok(())

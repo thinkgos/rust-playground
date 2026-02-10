@@ -4,7 +4,7 @@ use opencv::imgproc;
 use opencv::prelude::*;
 
 fn main() -> Result<(), anyhow::Error> {
-    let img = imgcodecs::imread("assets/lena.png", imgcodecs::IMREAD_GRAYSCALE)?;
+    let img = imgcodecs::imread("assets/shape.jpg", imgcodecs::IMREAD_GRAYSCALE)?;
     // ! 边缘检测
     // 提取步骤:
     // 1. 使用5x5的高斯滤波消除噪声, 平滑处理, 去处噪点.
@@ -22,6 +22,6 @@ fn main() -> Result<(), anyhow::Error> {
         false,    //
     )?;
 
-    imgcodecs::imwrite("assets/output/lena-canny.png", &dst, &Vector::new())?;
+    imgcodecs::imwrite("assets/output/shape-canny.png", &dst, &Vector::new())?;
     Ok(())
 }

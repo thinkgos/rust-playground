@@ -45,7 +45,7 @@ fn main() -> Result<(), anyhow::Error> {
     )?;
 
     imgcodecs::imwrite(
-        "assets/output/sun_contour_convex_hull.png",
+        "assets/output/sun-contour-convex-hull.png",
         &img,
         &Vector::new(),
     )?;

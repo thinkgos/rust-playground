@@ -51,7 +51,7 @@ fn main() -> Result<(), anyhow::Error> {
     )?;
 
     imgcodecs::imwrite(
-        "assets/output/lena_template_match.png",
+        "assets/output/lena-template-match.png",
         &img,
         &Vector::new(),
     )?;
