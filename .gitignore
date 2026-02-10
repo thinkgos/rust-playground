@@ -23,3 +23,4 @@ target
 /Opencv/run-over-cv/assets/output/*.png
 /Opencv/run-over-cv/assets/output/*.jpg
 /Opencv/run-over-cv/assets/output/*.jpeg
+/Opencv/face-detect/assets/*-detect-result.jpeg
