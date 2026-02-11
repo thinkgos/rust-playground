@@ -1,7 +1,7 @@
 [workspace]
 members = [
     "DataAnalysis/polars-cc",
-    "Opencv/face-detect",
+    "Opencv/face-identify",
     "Opencv/run-over-cv",
     "playground",
 ]
