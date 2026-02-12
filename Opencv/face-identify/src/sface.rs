@@ -50,7 +50,7 @@ impl Sface {
         face1: &impl ToInputArray,
         img2: &impl ToInputArray,
         face2: &impl ToInputArray,
-    ) -> Result<(f64, bool), anyhow::Error> {
+    ) -> Result<MatchResult, anyhow::Error> {
         let mut feature1 = Mat::default();
         let mut feature2 = Mat::default();
         self.feature(img1, Some(face1), &mut feature1)?;
@@ -63,7 +63,10 @@ impl Sface {
                     &feature2,
                     FaceRecognizerSF_DisType::FR_COSINE.into(),
                 )?;
-                (distance, distance >= threshold)
+                MatchResult {
+                    distance,
+                    is_matched: distance >= threshold,
+                }
             }
             FaceRecognizerSFThreshold::Norm12(threshold) => {
                 let distance = self.mode.match_(
@@ -71,9 +74,19 @@ impl Sface {
                     &feature2,
                     FaceRecognizerSF_DisType::FR_NORM_L2.into(),
                 )?;
-                (distance, distance <= threshold)
+
+                MatchResult {
+                    distance,
+                    is_matched: distance <= threshold,
+                }
             }
         };
         Ok(result)
     }
+}
+
+#[derive(Debug)]
+pub struct MatchResult {
+    pub distance: f64,
+    pub is_matched: bool,
 }

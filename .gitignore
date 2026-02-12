@@ -23,4 +23,6 @@ target
 /Opencv/run-over-cv/assets/output/*.png
 /Opencv/run-over-cv/assets/output/*.jpg
 /Opencv/run-over-cv/assets/output/*.jpeg
-/Opencv/face-identify/assets/*-detect-result.png
+/Opencv/face-identify/assets/*-result.png
+/Opencv/face-identify/assets/*-result.jpg
+/Opencv/face-identify/assets/*-result.jpeg

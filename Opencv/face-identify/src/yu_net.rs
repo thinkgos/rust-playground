@@ -1,5 +1,6 @@
 use std::ops::{Deref, DerefMut};
 
+use opencv::core::{Point2f, Rect2f};
 use opencv::prelude::*;
 use opencv::{
     core::{Mat, Ptr, Size, ToInputArray},
@@ -42,5 +43,35 @@ impl Deref for YuNet {
 impl DerefMut for YuNet {
     fn deref_mut(&mut self) -> &mut Self::Target {
         &mut self.mode
+    }
+}
+
+#[derive(Debug, Default, PartialEq, PartialOrd)]
+pub struct Detection {
+    pub face: Rect2f,
+    pub eye_right: Point2f,
+    pub eye_left: Point2f,
+    pub nose: Point2f,
+    pub corner_right: Point2f,
+    pub corner_left: Point2f,
+    pub score: f32,
+}
+
+impl TryFrom<&[f32]> for Detection {
+    type Error = anyhow::Error;
+
+    fn try_from(item: &[f32]) -> Result<Self, Self::Error> {
+        if item.len() != 15 {
+            return Err(anyhow::anyhow!("detection data must be equal to 15"));
+        }
+        Ok(Self {
+            face: Rect2f::new(item[0], item[1], item[2], item[3]),
+            eye_right: Point2f::new(item[4], item[5]),
+            eye_left: Point2f::new(item[6], item[7]),
+            nose: Point2f::new(item[8], item[9]),
+            corner_right: Point2f::new(item[10], item[11]),
+            corner_left: Point2f::new(item[12], item[13]),
+            score: item[14],
+        })
     }
 }
