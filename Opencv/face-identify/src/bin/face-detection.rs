@@ -15,8 +15,9 @@ fn main() -> Result<(), anyhow::Error> {
     if ret == 0 {
         println!("No face detected.");
         return Ok(());
+    } else {
+        println!("Detected faces: {:?}", ret);
     }
-    println!("Detected faces: {:?}", ret);
 
     // 获取一行检测结果
     let row = faces.at_row::<f32>(0)?;

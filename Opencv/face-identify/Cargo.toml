@@ -13,10 +13,16 @@ repository.workspace = true
 
 
 [[bin]]
+# 人脸检测
 name = "face-detection"
 
 [[bin]]
+# 人脸识别
 name = "face-recognition"
+
+[[bin]]
+# 人脸质量评估
+name = "face-quality"
 
 [dependencies]
 opencv = { version = "0.98" }
